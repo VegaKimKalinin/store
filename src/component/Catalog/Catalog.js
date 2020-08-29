@@ -10,9 +10,8 @@ import ProductCard from '../ProductCard/ProductCard';
 import './catalog.css';
 
 
-const Catalog = (props) =>
+const Catalog = ({products}) =>
 {
-    const products = [...props.products];
     return (
         <div className='catalog'>
             {products.map((product) => <ProductCard product={product} key={product.id}/>)}
