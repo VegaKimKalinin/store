@@ -1,6 +1,6 @@
 # dependencies
 /node_modules
 # dist file
-/dist
+dist/
 #cache
 /.cache
