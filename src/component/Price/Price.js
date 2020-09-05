@@ -1,11 +1,8 @@
-/*
-Реализовать компонент Price
-*/
-
 import React from 'react';
-import './price.css'
+import './price.css';
 
-const Price = ({price}) =>
-<span className='product-card__price'>{" Цена: " + price}</span>;
+const Price = ({ price }) => (
+  <span className="product-card__price">{' Цена: ' + price}</span>
+);
 
 export default Price;
