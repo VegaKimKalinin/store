@@ -8,7 +8,7 @@ import React from 'react';
 import Image from '../Image/Image';
 import TextBox from '../TextBox/TextBox';
 import Price from '../Price/Price';
-import ButtonAddToBasket from '../ButtonAddToBasket/ButtonAddToBasket';
+import InputCountGoods from '../InputCountGoods/InputCountGoods';
 import './ProductCard.css';
 
 const ProductCard = ({ product }) => {
@@ -17,7 +17,7 @@ const ProductCard = ({ product }) => {
       <Image img={product.img} />
       <TextBox text={product.title} />
       <Price price={product.price} />
-      <ButtonAddToBasket product={product} />
+      <InputCountGoods product={product} />
     </div>
   );
 };
