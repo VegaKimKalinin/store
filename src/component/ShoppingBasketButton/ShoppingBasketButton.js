@@ -1,19 +1,21 @@
 import React from 'react';
+import BasketContext from '../BasketContext/BasketContext';
 
 class ShoppingBasketButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      counter: 0,
-    };
   }
+
   render() {
+    let { productList } = this.context;
     return (
       <button type="button">
-        <span>{this.state.counter} </span>Корзина
+        <span> {productList.length} </span>Корзина
       </button>
     );
   }
 }
+
+ShoppingBasketButton.contextType = BasketContext;
 
 export default ShoppingBasketButton;
