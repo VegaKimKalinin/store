@@ -16,11 +16,11 @@ class CatalogPage extends React.Component {
   }
 
   addToProductList(count, product) {
-    let list = [...this.state.productList];
+    const list = [...this.state.productList];
     for (let i = 1; i <= count; i++) {
       list.push(product);
     }
-    this.setState((state) => ({
+    this.setState( state => ({
       productList: [...list],
     }));
   }

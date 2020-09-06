@@ -10,8 +10,8 @@ class InputCountGoods extends React.Component {
 
   onFormInputCountGoods(event) {
     event.preventDefault();
-    let { product } = this.props;
-    let { _count } = this.refs;
+    const { product } = this.props;
+    const { _count } = this.refs;
     const { addToProductList } = this.context;
     addToProductList(_count.value, product);
     _count.value = 1;

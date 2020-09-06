@@ -21,7 +21,7 @@ class ShoppingBasketButton extends React.Component {
     event.preventDefault();
   }
   render() {
-    let { productList } = this.context;
+    const { productList } = this.context;
     return (
       <button type="button" onDrop={this.onDrop} onDragOver={this.onDragOver}>
         <span> {productList.length} </span>Корзина
