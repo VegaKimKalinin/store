@@ -1,7 +1,18 @@
 import React from 'react';
-import Catalog from '../Catalog/Catalog';
-import Products from '../../constants/Products';
+import { Router, Route, Switch} from 'react-router-dom';
+import {
+  Catalog,
+  Menu,
+  AboutProduct,
+  Products,
+  Basket,
+  Contact,
+  ErrorPage,
+} from '../ExportedComponent/ExportedComponent';
 import BasketContext from '../BasketContext/BasketContext';
+import { createBrowserHistory } from 'history';
+
+const history = createBrowserHistory();
 
 class CatalogPage extends React.Component {
   constructor(props) {
@@ -27,9 +38,38 @@ class CatalogPage extends React.Component {
 
   render() {
     return (
-      <BasketContext.Provider value={this.state}>
-        <Catalog products={Products} />
-      </BasketContext.Provider>
+      <Router history={history}>
+        <div>
+          <Menu />
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={() => (
+                <BasketContext.Provider value={this.state}>
+                  <Catalog products={Products} />
+                </BasketContext.Provider>
+              )}
+            />
+
+            <Route
+              path="/about-product"
+              exact
+              render={() => <AboutProduct />}
+            ></Route>
+
+            <Route
+              path="/basket"
+              exact
+              render={() => <Basket addedProducts={this.state.productList} />}
+            ></Route>
+
+            <Route path="/contact" exact render={() => <Contact />}></Route>
+
+            <Route component={ErrorPage}></Route>
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }

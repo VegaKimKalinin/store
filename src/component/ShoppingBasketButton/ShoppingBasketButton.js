@@ -1,5 +1,7 @@
 import React from 'react';
 import BasketContext from '../BasketContext/BasketContext';
+import { Link } from 'react-router-dom';
+import './ShoppingBasketButton.css';
 
 class ShoppingBasketButton extends React.Component {
   constructor(props) {
@@ -23,9 +25,11 @@ class ShoppingBasketButton extends React.Component {
   render() {
     const { productList } = this.context;
     return (
-      <button type="button" onDrop={this.onDrop} onDragOver={this.onDragOver}>
-        <span> {productList.length} </span>Корзина
-      </button>
+      <Link to='/basket'>
+        <button className="button" type="button" onDrop={this.onDrop} onDragOver={this.onDragOver}>
+          <span> {productList.length} </span>Корзина
+        </button>
+      </Link>
     );
   }
 }

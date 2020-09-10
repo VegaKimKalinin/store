@@ -1,0 +1,23 @@
+.menu__list {
+  min-height: 20vh;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+
+  padding: 0 20px;
+
+  list-style: none;
+  background-color: rgb(78, 77, 158);
+}
+
+.menu__item:hover {
+  border: 1px solid oldlace;
+}
+
+
+.menu__item a {
+  color: #ffffff;
+  font-size: 25px;
+  padding: 10px 20px;
+  text-decoration: none;
+}

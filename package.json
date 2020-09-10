@@ -12,6 +12,10 @@
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "history": "^5.0.0",
+    "re": "^0.1.4",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "superagent": "^6.0.0"
   },
   "devDependencies": {
