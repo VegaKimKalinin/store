@@ -29,7 +29,7 @@ class ProductCard extends React.Component {
     return (
       <div
         className="product-card"
-        draggable={true}
+        draggable
         onDragStart={this.onDragStart}
         onDragOver={this.onDragOver}
       >
