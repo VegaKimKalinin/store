@@ -20,7 +20,7 @@ class InputCountGoods extends React.Component {
 
   handelChange(event) {
     const count = event.target.value;
-    this.setState((state) => ({ count }));
+    this.setState(() => ({ count }));
   }
 
   render() {
