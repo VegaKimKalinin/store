@@ -6,9 +6,7 @@ const Menu = () => (
   <nav className="menu">
     <ul className="menu__list">
       <li className="menu__item">
-        <Link to="/">
-          На главную
-        </Link>
+        <Link to="/">На главную</Link>
       </li>
       <li className="menu__item">
         <Link to="/contact">Контакты</Link>
