@@ -6,7 +6,7 @@ import './BasketCard.css';
 
 const BasketCard = ({ product }) => (
   <div className="basket-card">
-    <Image img={product.img} />
+    <Image img={product.img} id={product.id} />
     <TextBox text={product.title} />
     <Price price={product.price} />
   </div>

@@ -1,38 +1,12 @@
 import React from 'react';
-import { Catalog, Products } from '../ExportedComponent/ExportedComponent';
-import BasketContext from '../BasketContext/BasketContext';
+import Catalog from '../Catalog/Catalog';
 
-class CatalogPage extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.addToProductList = this.addToProductList.bind(this);
-
-    this.state = {
-      productList: [],
-      addToProductList: this.addToProductList,
-    };
+const CatalogPage = ({ products, location }) => {
+  if (location.state) {
+    alert(location.state.msg);
+    location.state = undefined;
   }
-
-  addToProductList(count, product) {
-    const list = [...this.state.productList];
-    for (let i = 1; i <= count; i++) {
-      list.push(product);
-    }
-    this.setState(() => ({
-      productList: [...list],
-    }));
-  }
-
-  render() {
-    return (
-      <div>
-        <BasketContext.Provider value={this.state}>
-          <Catalog products={Products} />
-        </BasketContext.Provider>
-      </div>
-    );
-  }
-}
+  return <Catalog products={products} />;
+};
 
 export default CatalogPage;
