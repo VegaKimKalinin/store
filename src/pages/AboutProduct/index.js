@@ -2,9 +2,12 @@ import React from 'react';
 import Image from './components/Image';
 import TextBox from './components/TextBox';
 import Price from './components/Price';
+import products from '../../constants/Products';
 
-const AboutProduct = (props) => {
-  const product = props.product[0];
+const AboutProduct = ({ match }) => {
+  const product = products.filter(
+    (product) => product.id == match.params.id,
+  )[0];
   return (
     <div
       style={{
