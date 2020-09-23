@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
-import BasketContext from '../BasketContext/BasketContext';
-import history from '../History/History';
+import BasketContext from '../../provider/BasketContext';
+import history from '../History';
 import {
   Products,
   Menu,
@@ -10,7 +10,8 @@ import {
   AboutProduct,
   ErrorPage,
 } from '../ExportedComponent/ExportedComponent';
-import CatalogPage from '../CatalogPage/CatalogPage';
+
+import CatalogPage from '../../pages/CatalogPage';
 
 class App extends React.Component {
   constructor(props) {
@@ -41,27 +42,10 @@ class App extends React.Component {
           <React.Fragment>
             <Menu />
             <Switch>
-
+              <Route exact path="/" component={CatalogPage} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/basket" component={Basket} />
               <Route
-                exact
-                path="/"
-                render={({ location }) => (
-                  <CatalogPage products={Products} location={location} />
-                )}
-              />
-
-              <Route exact path="/contact" component={Contact} />
-
-              <Route
-                exact
-                path="/basket"
-                render={(props) => (
-                  <Basket addedProducts={this.state.productList} {...props} />
-                )}
-              />
-
-              <Route
-                exact
                 path="/product/:id"
                 render={({ match }) => (
                   <AboutProduct
@@ -71,7 +55,6 @@ class App extends React.Component {
                   />
                 )}
               />
-
               <Route component={ErrorPage} />
             </Switch>
           </React.Fragment>
