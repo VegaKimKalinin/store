@@ -10,8 +10,16 @@ class AppProvider extends React.Component {
     this.state = {
       productList: [],
       addToProductList: this.addToProductList,
+      regUser: null,
+      logIn: this.logIn,
     };
   }
+
+  logIn = (userName, password) => {
+    this.setState(() => ({
+      regUser: { userName, password },
+    }));
+  };
 
   addToProductList(count, product) {
     const list = [...this.state.productList];
@@ -24,7 +32,9 @@ class AppProvider extends React.Component {
   }
   render() {
     return (
-      <BascetContext.Provider value={this.state}>{this.props.children}</BascetContext.Provider>
+      <BascetContext.Provider value={this.state}>
+        {this.props.children}
+      </BascetContext.Provider>
     );
   }
 }
