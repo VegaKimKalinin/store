@@ -1,9 +1,10 @@
-import AboutProduct from '../pages/AboutProduct';
+import BasketPage from '../pages/BasketPage';
 import MainLayout from '../layouts/MainLayout';
 
 const RootRoute = {
-  path: '/product/:id',
-  component: AboutProduct,
+  name: 'Корзина',
+  path: '/basket',
+  component: BasketPage,
   layout: MainLayout,
 };
 

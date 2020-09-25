@@ -1,7 +1,7 @@
 import ErrorPage from '../pages/ErrorPage';
 
 const RootRoute = {
-  component: ErrorPage
+  component: ErrorPage,
 };
 
 export default RootRoute;

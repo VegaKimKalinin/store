@@ -5,6 +5,7 @@ import AppProvider from './provider';
 import history from './component/History';
 import routes from './routes';
 import RouteWithSubRoutes from './component/RouteWithSubRoutes';
+import 'antd/dist/antd.css';
 
 const App = () => (
   <AppProvider>

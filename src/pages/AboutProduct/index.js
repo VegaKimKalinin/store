@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import Image from './components/Image';
 import TextBox from './components/TextBox';
 import Price from './components/Price';
@@ -24,4 +25,4 @@ const AboutProduct = ({ match }) => {
   );
 };
 
-export default AboutProduct;
+export default withRouter(AboutProduct);

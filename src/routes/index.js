@@ -1,9 +1,9 @@
 import CatalogPage from './CatalogPage';
-import Basket from './Basket';
+import BasketPage from './BasketPage';
 import AboutProduct from './AboutProduct';
 import Contact from './Contact';
 import ErrorPage from './ErrorPage';
 
-const routes = [CatalogPage, Basket, AboutProduct, Contact, ErrorPage];
+const routes = [CatalogPage, BasketPage, AboutProduct, Contact, ErrorPage];
 
 export default routes;
