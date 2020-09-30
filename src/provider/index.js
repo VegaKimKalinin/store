@@ -8,12 +8,33 @@ class AppProvider extends React.Component {
     this.addToProductList = this.addToProductList.bind(this);
 
     this.state = {
+      data: {},
       productList: [],
       addToProductList: this.addToProductList,
       regUser: null,
       logIn: this.logIn,
     };
   }
+
+  componentDidMount() {
+    const space_id = 'h5o3sde0kdje';
+    const environment_id = 'master';
+    const access_token = 'OE3yBQhdbVMP-aMTORuJw63yv-fxDRBdAyUx8lrxOrw';
+
+    fetch(
+      `https://cdn.contentful.com/spaces/${space_id}/` +
+        `environments/${environment_id}/` +
+        `entries?access_token=${access_token}`,
+    )
+      .then((res) => res.json())
+      .then((data) => this.setState({ data }))
+      .catch((er) => console.log(er));
+    console.log('mdsfmdslkmfkdsmf');
+  }
+
+  setData = (data) => {
+    this.setState({ data });
+  };
 
   logIn = (userName, password) => {
     this.setState(() => ({
@@ -30,6 +51,7 @@ class AppProvider extends React.Component {
       productList: [...list],
     }));
   }
+
   render() {
     return (
       <BascetContext.Provider value={this.state}>
