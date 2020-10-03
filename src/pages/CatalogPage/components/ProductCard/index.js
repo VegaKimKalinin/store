@@ -35,9 +35,9 @@ class ProductCard extends React.Component {
         onDragStart={this.onDragStart}
         onDragOver={this.onDragOver}
       >
-        <Image img={product.img} id={product.id} />
-        <TextBox text={product.title} />
-        <Price price={product.price} />
+        <Image img={product.fields.product.img} id={product.sys.id} />
+        <TextBox text={product.fields.product.title} />
+        <Price price={product.fields.product.price} />
         <InputCountGoods product={product} />
       </div>
     );

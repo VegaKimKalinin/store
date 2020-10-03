@@ -3,13 +3,11 @@ import ProductCard from './components/ProductCard';
 import ShoppingBasketButton from './components/ShoppingBasketButton';
 import { withRouter } from 'react-router-dom';
 import { message } from 'antd';
-import products from '../../constants/Products';
 import BasketContext from '../../provider/BasketContext';
 import './СatalogPage.css';
 
 const CatalogPage = ({ location }) => {
   const { data } = React.useContext(BasketContext);
-  console.log(data);
 
   React.useEffect(() => {
     if (location.state) {
@@ -21,9 +19,13 @@ const CatalogPage = ({ location }) => {
     <React.Fragment>
       <ShoppingBasketButton />
       <div className="catalog">
-        {products.map((product) => (
-          <ProductCard product={product} key={product.id} />
-        ))}
+        {data ? (
+          data.items.map((item) => (
+            <ProductCard product={item} key={item.sys.id} />
+          ))
+        ) : (
+          <span>loding data</span>
+        )}
       </div>
     </React.Fragment>
   );

@@ -8,7 +8,7 @@ class AppProvider extends React.Component {
     this.addToProductList = this.addToProductList.bind(this);
 
     this.state = {
-      data: {},
+      data: null,
       productList: [],
       addToProductList: this.addToProductList,
       regUser: null,
@@ -29,7 +29,6 @@ class AppProvider extends React.Component {
       .then((res) => res.json())
       .then((data) => this.setState({ data }))
       .catch((er) => console.log(er));
-    console.log('mdsfmdslkmfkdsmf');
   }
 
   setData = (data) => {

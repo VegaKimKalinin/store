@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Image = ({ img, id }) => (
   <Link to={`/product/${id}`}>
     <img
-      src={img.imageUrl}
+      src={img.imageUrl[0]}
       width="400px"
       height="400px"
       alt={img.alt}

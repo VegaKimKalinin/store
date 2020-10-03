@@ -18,8 +18,8 @@ const Basket = () => (
       } else {
         return (
           <div className="basket">
-            {productList.map((addedProduct, i) => (
-              <BasketCard product={addedProduct} key={i} />
+            {productList.map((addedProduct) => (
+              <BasketCard product={addedProduct} key={addedProduct.sys.id} />
             ))}
           </div>
         );
