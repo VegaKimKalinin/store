@@ -1,5 +1,6 @@
 import React from 'react';
 import BascetContext from './BasketContext';
+import { space_id, environment_id, access_token } from '../const/ServerConst';
 
 class AppProvider extends React.Component {
   constructor(props) {
@@ -17,10 +18,6 @@ class AppProvider extends React.Component {
   }
 
   componentDidMount() {
-    const space_id = 'h5o3sde0kdje';
-    const environment_id = 'master';
-    const access_token = 'OE3yBQhdbVMP-aMTORuJw63yv-fxDRBdAyUx8lrxOrw';
-
     fetch(
       `https://cdn.contentful.com/spaces/${space_id}/` +
         `environments/${environment_id}/` +
