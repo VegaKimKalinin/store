@@ -19,7 +19,7 @@ const Basket = () => (
         return (
           <div className="basket">
             {productList.map((addedProduct, item) => (
-              <BasketCard product={addedProduct} key={item} />
+              <BasketCard productItem={addedProduct} key={item} />
             ))}
           </div>
         );

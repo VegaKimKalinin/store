@@ -17,7 +17,6 @@ const ProductCard = ({ productItem }) => {
   };
 
   const { product } = productItem.fields;
-  const { id } = productItem.sys;
 
   return (
     <div
@@ -26,7 +25,7 @@ const ProductCard = ({ productItem }) => {
       onDragStart={onDragStart}
       onDragOver={onDragOver}
     >
-      <Image img={product.img} id={id} />
+      <Image img={product.img} id={productItem.sys.id} />
       <TextBox text={product.title} />
       <Price price={product.price} />
       <InputCountGoods product={productItem} />
