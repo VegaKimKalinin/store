@@ -1,15 +1,9 @@
 import React from 'react';
 
-function MiniImage({ item, text, callback, order }) {
-  function setImage() {
-    callback(order);
-  }
-
-  return (
-    <div onClick={setImage}>
-      <img src={item} alt={text} style={{ maxWidth: '100%' }} />
-    </div>
-  );
-}
+const MiniImage = ({ item, text, callback }) => (
+  <div onClick={callback}>
+    <img src={item} alt={text} style={{ maxWidth: '100%' }} />
+  </div>
+);
 
 export default MiniImage;

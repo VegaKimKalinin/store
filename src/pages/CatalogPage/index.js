@@ -1,19 +1,20 @@
 import React from 'react';
 import ProductCard from './components/ProductCard';
 import ShoppingBasketButton from './components/ShoppingBasketButton';
-import { withRouter } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { message } from 'antd';
 import BasketContext from '../../provider/BasketContext';
 import './СatalogPage.css';
 
-const CatalogPage = ({ location }) => {
+const CatalogPage = () => {
   const { data } = React.useContext(BasketContext);
+  const location = useLocation();
 
   React.useEffect(() => {
     if (location.state) {
       message.info(location.state.message);
     }
-  });
+  }, []);
 
   return (
     <React.Fragment>
@@ -21,7 +22,7 @@ const CatalogPage = ({ location }) => {
       <div className="catalog">
         {data ? (
           data.items.map((item) => (
-            <ProductCard product={item} key={item.sys.id} />
+            <ProductCard productItem={item} key={item.sys.id} />
           ))
         ) : (
           <span>loding data</span>
@@ -30,4 +31,4 @@ const CatalogPage = ({ location }) => {
     </React.Fragment>
   );
 };
-export default withRouter(CatalogPage);
+export default CatalogPage;

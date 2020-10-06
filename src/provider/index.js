@@ -1,6 +1,6 @@
 import React from 'react';
 import BascetContext from './BasketContext';
-import { space_id, environment_id, access_token } from '../const/ServerConst';
+import { fetchProducts } from '../api/FetchData';
 
 class AppProvider extends React.Component {
   constructor(props) {
@@ -18,12 +18,7 @@ class AppProvider extends React.Component {
   }
 
   componentDidMount() {
-    fetch(
-      `https://cdn.contentful.com/spaces/${space_id}/` +
-        `environments/${environment_id}/` +
-        `entries?access_token=${access_token}`,
-    )
-      .then((res) => res.json())
+    fetchProducts()
       .then((data) => this.setState({ data }))
       .catch((er) => console.log(er));
   }

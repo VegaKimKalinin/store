@@ -4,44 +4,34 @@ import Image from '../Image';
 import TextBox from '../TextBox';
 import Price from '../Price';
 import InputCountGoods from '../InputCountGoods';
-
 import './ProductCard.css';
 
-class ProductCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onDragStart = this.onDragStart.bind(this);
-    this.onDragOver = this.onDragOver.bind(this);
-    this.state = {
-      product: this.props.product,
-    };
-  }
+const ProductCard = ({ productItem }) => {
+  const onDragStart = (event) => {
+    event.dataTransfer.setData('product', JSON.stringify(productItem));
+  };
 
-  onDragStart(event) {
-    event.dataTransfer.setData('product', JSON.stringify(this.props.product));
-  }
-
-  onDragOver(event) {
+  const onDragOver = (event) => {
     event.preventDefault();
     event.stopPropagation();
-  }
+  };
 
-  render() {
-    const { product } = this.props;
-    return (
-      <div
-        className="product-card"
-        draggable
-        onDragStart={this.onDragStart}
-        onDragOver={this.onDragOver}
-      >
-        <Image img={product.fields.product.img} id={product.sys.id} />
-        <TextBox text={product.fields.product.title} />
-        <Price price={product.fields.product.price} />
-        <InputCountGoods product={product} />
-      </div>
-    );
-  }
-}
+  const { product } = productItem.fields;
+  const { id } = productItem.sys;
+
+  return (
+    <div
+      className="product-card"
+      draggable
+      onDragStart={onDragStart}
+      onDragOver={onDragOver}
+    >
+      <Image img={product.img} id={id} />
+      <TextBox text={product.title} />
+      <Price price={product.price} />
+      <InputCountGoods product={productItem} />
+    </div>
+  );
+};
 
 export default ProductCard;

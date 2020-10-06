@@ -1,43 +1,33 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import BasketContext from '../../../../provider/BasketContext';
 
 import ButtonAddToBasket from '../ButtonAddToBasket';
 
-class InputCountGoods extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onFormInputCountGoods = this.onFormInputCountGoods.bind(this);
-    this.handelChange = this.handelChange.bind(this);
-    this.state = { count: 1 };
-  }
+const InputCountGoods = ({ product }) => {
+  const [count, setCount] = useState(1);
+  const context = useContext(BasketContext);
 
-  onFormInputCountGoods(event) {
+  const onFormInputCountGoods = (event) => {
     event.preventDefault();
-    const { product } = this.props;
-    const { count } = this.state;
-    const { addToProductList } = this.context;
+    const { addToProductList } = context;
     addToProductList(count, product);
-  }
+  };
 
-  handelChange(event) {
-    const count = event.target.value;
-    this.setState(() => ({ count }));
-  }
+  const handelChange = (event) => {
+    setCount(event.target.value);
+  };
 
-  render() {
-    return (
-      <form onSubmit={this.onFormInputCountGoods}>
-        <input
-          type="number"
-          defaultValue="1"
-          min="1"
-          onChange={this.handelChange}
-        ></input>
-        <ButtonAddToBasket />
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={onFormInputCountGoods}>
+      <input
+        type="number"
+        defaultValue="1"
+        min="1"
+        onChange={handelChange}
+      ></input>
+      <ButtonAddToBasket />
+    </form>
+  );
+};
 
-InputCountGoods.contextType = BasketContext;
 export default InputCountGoods;
