@@ -1,5 +1,6 @@
 import React from 'react';
 import BascetContext from './BasketContext';
+import { fetchProducts } from '../api/FetchData';
 
 class AppProvider extends React.Component {
   constructor(props) {
@@ -8,12 +9,23 @@ class AppProvider extends React.Component {
     this.addToProductList = this.addToProductList.bind(this);
 
     this.state = {
+      data: null,
       productList: [],
       addToProductList: this.addToProductList,
       regUser: null,
       logIn: this.logIn,
     };
   }
+
+  componentDidMount() {
+    fetchProducts()
+      .then((data) => this.setState({ data }))
+      .catch((er) => console.log(er));
+  }
+
+  setData = (data) => {
+    this.setState({ data });
+  };
 
   logIn = (userName, password) => {
     this.setState(() => ({
@@ -30,6 +42,7 @@ class AppProvider extends React.Component {
       productList: [...list],
     }));
   }
+
   render() {
     return (
       <BascetContext.Provider value={this.state}>

@@ -1,27 +1,34 @@
 import React from 'react';
 import ProductCard from './components/ProductCard';
 import ShoppingBasketButton from './components/ShoppingBasketButton';
-import { withRouter } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { message } from 'antd';
-import products from '../../constants/Products';
+import BasketContext from '../../provider/BasketContext';
 import './СatalogPage.css';
 
-const CatalogPage = ({ location }) => {
+const CatalogPage = () => {
+  const { data } = React.useContext(BasketContext);
+  const location = useLocation();
+
   React.useEffect(() => {
     if (location.state) {
       message.info(location.state.message);
     }
-  });
+  }, []);
 
   return (
     <React.Fragment>
       <ShoppingBasketButton />
       <div className="catalog">
-        {products.map((product) => (
-          <ProductCard product={product} key={product.id} />
-        ))}
+        {data ? (
+          data.items.map((item) => (
+            <ProductCard productItem={item} key={item.sys.id} />
+          ))
+        ) : (
+          <span>loding data</span>
+        )}
       </div>
     </React.Fragment>
   );
 };
-export default withRouter(CatalogPage);
+export default CatalogPage;
