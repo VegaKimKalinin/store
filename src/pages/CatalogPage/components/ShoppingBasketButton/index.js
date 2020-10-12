@@ -1,5 +1,4 @@
 import React from 'react';
-import BasketContext from '../../../../provider/BasketContext';
 import { Link } from 'react-router-dom';
 import './ShoppingBasketButton.css';
 
@@ -12,18 +11,16 @@ class ShoppingBasketButton extends React.Component {
 
   onDrop(event) {
     event.preventDefault();
-    const count = 1;
-    const { addToProductList } = this.context;
     const product = JSON.parse(event.dataTransfer.getData('product'));
-    addToProductList(count, product);
+    this.props.addToBasket(product);
   }
 
   onDragOver(event) {
     event.stopPropagation();
     event.preventDefault();
   }
+
   render() {
-    const { productList } = this.context;
     return (
       <Link to="/basket">
         <button
@@ -32,13 +29,11 @@ class ShoppingBasketButton extends React.Component {
           onDrop={this.onDrop}
           onDragOver={this.onDragOver}
         >
-          <span> {productList.length} </span>Корзина
+          <span> {this.props.basketProducts.length} </span>Корзина
         </button>
       </Link>
     );
   }
 }
-
-ShoppingBasketButton.contextType = BasketContext;
 
 export default ShoppingBasketButton;

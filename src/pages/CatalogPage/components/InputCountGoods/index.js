@@ -1,16 +1,14 @@
-import React, { useState, useContext } from 'react';
-import BasketContext from '../../../../provider/BasketContext';
-
+import React, { useState } from 'react';
 import ButtonAddToBasket from '../ButtonAddToBasket';
 
-const InputCountGoods = ({ product }) => {
+const InputCountGoods = ({ product, addToBasket }) => {
   const [count, setCount] = useState(1);
-  const context = useContext(BasketContext);
 
   const onFormInputCountGoods = (event) => {
     event.preventDefault();
-    const { addToProductList } = context;
-    addToProductList(count, product);
+    for (let i = count; i > 0; i--) {
+      addToBasket(product);
+    }
   };
 
   const handelChange = (event) => {

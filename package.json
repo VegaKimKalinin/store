@@ -9,12 +9,15 @@
   "author": "Kalinin Dmitry",
   "license": "ISC",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.2.5",
     "antd": "^4.6.5",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "history": "^4.10.1",
+    "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
     "superagent": "^6.0.0"
   },
   "devDependencies": {

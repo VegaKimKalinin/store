@@ -6,14 +6,14 @@ function RouteWithSubRoutes(route) {
     return (
       <Route exact={route.exact} path={route.path}>
         <route.layout name={route.name}>
-          <route.component />
+          <route.component {...route} />
         </route.layout>
       </Route>
     );
   } else {
     return (
       <Route exact={route.exact} path={route.path}>
-        <route.component />
+        <route.component {...route} />
       </Route>
     );
   }

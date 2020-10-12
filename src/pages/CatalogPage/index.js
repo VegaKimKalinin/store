@@ -1,13 +1,15 @@
 import React from 'react';
 import ProductCard from './components/ProductCard';
 import ShoppingBasketButton from './components/ShoppingBasketButton';
+import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { basketAdded } from '../../store/basket';
+import { FETCH_PRODUCTS_REQUEST } from '../../store/apiProducts';
 import { message } from 'antd';
-import BasketContext from '../../provider/BasketContext';
+
 import './СatalogPage.css';
 
-const CatalogPage = () => {
-  const { data } = React.useContext(BasketContext);
+const CatalogPage = ({ data, getProducts, addToBasket, basketProducts }) => {
   const location = useLocation();
 
   React.useEffect(() => {
@@ -16,13 +18,24 @@ const CatalogPage = () => {
     }
   }, []);
 
+  React.useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <React.Fragment>
-      <ShoppingBasketButton />
+      <ShoppingBasketButton
+        addToBasket={addToBasket}
+        basketProducts={basketProducts}
+      />
       <div className="catalog">
         {data ? (
           data.items.map((item) => (
-            <ProductCard productItem={item} key={item.sys.id} />
+            <ProductCard
+              productItem={item}
+              key={item.sys.id}
+              addToBasket={addToBasket}
+            />
           ))
         ) : (
           <span>loding data</span>
@@ -31,4 +44,19 @@ const CatalogPage = () => {
     </React.Fragment>
   );
 };
-export default CatalogPage;
+
+const mapStateToProps = (state) => ({
+  data: state.entities.productsList,
+  basketProducts: state.entities.basket,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getProducts: () => {
+    dispatch(FETCH_PRODUCTS_REQUEST());
+  },
+  addToBasket: (product) => {
+    dispatch(basketAdded(product));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CatalogPage);
