@@ -25,7 +25,7 @@ const Basket = ({ basketProducts }) => {
 };
 
 const mapStateToProps = (state) => ({
-  basketProducts: state.entities.basket,
+  basketProducts: state.basket,
 });
 
 export default connect(mapStateToProps)(Basket);

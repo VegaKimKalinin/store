@@ -1,10 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { devToolsEnhancer } from 'redux-devtools-extension';
 import reducer from './reducer';
-import api from './middleware/api';
+import getProducts from './middleware/getProducts';
 
 export default function () {
-  return configureStore({
+  return createStore(
     reducer,
-    middleware: [api],
-  });
+    compose(applyMiddleware(getProducts), devToolsEnhancer({ trace: true })),
+  );
 }

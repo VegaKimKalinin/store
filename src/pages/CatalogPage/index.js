@@ -3,8 +3,8 @@ import ProductCard from './components/ProductCard';
 import ShoppingBasketButton from './components/ShoppingBasketButton';
 import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { basketAdded } from '../../store/basket';
-import { FETCH_PRODUCTS_REQUEST } from '../../store/apiProducts';
+import { basketAddProduct } from '../../store/action/basket';
+import { fetchProductsRequest } from '../../store/action/products';
 import { message } from 'antd';
 
 import './СatalogPage.css';
@@ -46,16 +46,16 @@ const CatalogPage = ({ data, getProducts, addToBasket, basketProducts }) => {
 };
 
 const mapStateToProps = (state) => ({
-  data: state.entities.productsList,
-  basketProducts: state.entities.basket,
+  data: state.products,
+  basketProducts: state.basket,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getProducts: () => {
-    dispatch(FETCH_PRODUCTS_REQUEST());
+    dispatch(fetchProductsRequest());
   },
   addToBasket: (product) => {
-    dispatch(basketAdded(product));
+    dispatch(basketAddProduct(product));
   },
 });
 
