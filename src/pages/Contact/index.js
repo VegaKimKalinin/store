@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
-import BasketContext from '../../provider/BasketContext';
+import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect, useSelector } from 'react-redux';
 import CommentReg from './component/CommentReg';
 import ContactComment from './component/ContactComment';
+import { regUser } from '../../store/action/regUser';
 
-const Contact = () => {
-  const { regUser } = useContext(BasketContext);
+const Contact = ({ regUser }) => {
+  const user = useSelector((state) => state.user);
   return (
     <div>
       <h1>Магазин Электроники</h1>
@@ -14,11 +16,15 @@ const Contact = () => {
       </p>
       <p>Телефон: +380 800 217 608</p>
       <p>Время работы: 24/24</p>
-      {(regUser && <ContactComment userName={regUser.userName} />) || (
-        <CommentReg />
+      {(user.logIn && <ContactComment userName={user.userName} />) || (
+        <CommentReg regUser={regUser} />
       )}
     </div>
   );
 };
 
-export default Contact;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ regUser }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(Contact);

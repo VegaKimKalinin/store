@@ -3,7 +3,6 @@ import ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
 import createStore from './store/configureStore';
 import { Router, Switch } from 'react-router-dom';
-import AppProvider from './provider';
 import history from './component/History';
 import routes from './routes';
 import RouteWithSubRoutes from './component/RouteWithSubRoutes';
@@ -13,17 +12,15 @@ const store = createStore();
 
 const App = () => (
   <Provider store={store}>
-    <AppProvider>
-      <Router history={history}>
-        <React.Fragment>
-          <Switch>
-            {routes.map((route, i) => (
-              <RouteWithSubRoutes {...route} key={i} />
-            ))}
-          </Switch>
-        </React.Fragment>
-      </Router>
-    </AppProvider>
+    <Router history={history}>
+      <React.Fragment>
+        <Switch>
+          {routes.map((route, i) => (
+            <RouteWithSubRoutes {...route} key={i} />
+          ))}
+        </Switch>
+      </React.Fragment>
+    </Router>
   </Provider>
 );
 

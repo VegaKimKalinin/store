@@ -1,6 +1,10 @@
+import { fetchProducts } from '../../api/FetchData';
+
 export function fetchProductsRequest() {
-  return {
-    type: 'FETCH_PRODUCTS_REQUEST',
+  return (dispatch) => {
+    fetchProducts()
+      .then((data) => dispatch(fetchProductsSuccess(data)))
+      .catch((error) => dispatch(fetchProductsFailure(error)));
   };
 }
 

@@ -1,11 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension';
 import reducer from './reducer';
-import getProducts from './middleware/getProducts';
+import thunk from 'redux-thunk';
 
 export default function () {
   return createStore(
     reducer,
-    compose(applyMiddleware(getProducts), devToolsEnhancer({ trace: true })),
+    compose(applyMiddleware(thunk), devToolsEnhancer({ trace: true })),
   );
 }

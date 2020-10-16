@@ -2,16 +2,19 @@ import React from 'react';
 import ProductCard from './components/ProductCard';
 import ShoppingBasketButton from './components/ShoppingBasketButton';
 import { connect } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 import { basketAddProduct } from '../../store/action/basket';
 import { fetchProductsRequest } from '../../store/action/products';
 import { message } from 'antd';
 
 import './СatalogPage.css';
 
-const CatalogPage = ({ data, getProducts, addToBasket, basketProducts }) => {
-  const location = useLocation();
-
+const CatalogPage = ({
+  data,
+  getProducts,
+  addToBasket,
+  basketProducts,
+  location,
+}) => {
   React.useEffect(() => {
     if (location.state) {
       message.info(location.state.message);
@@ -29,7 +32,7 @@ const CatalogPage = ({ data, getProducts, addToBasket, basketProducts }) => {
         basketProducts={basketProducts}
       />
       <div className="catalog">
-        {data ? (
+        {data.items ? (
           data.items.map((item) => (
             <ProductCard
               productItem={item}
@@ -46,7 +49,7 @@ const CatalogPage = ({ data, getProducts, addToBasket, basketProducts }) => {
 };
 
 const mapStateToProps = (state) => ({
-  data: state.products,
+  data: state.products.list,
   basketProducts: state.basket,
 });
 
