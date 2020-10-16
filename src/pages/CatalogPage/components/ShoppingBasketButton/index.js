@@ -12,7 +12,7 @@ class ShoppingBasketButton extends React.Component {
   onDrop(event) {
     event.preventDefault();
     const product = JSON.parse(event.dataTransfer.getData('product'));
-    this.props.addToBasket(product);
+    this.props.basketAddProduct(product);
   }
 
   onDragOver(event) {

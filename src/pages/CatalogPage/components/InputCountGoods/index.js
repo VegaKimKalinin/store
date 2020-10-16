@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import ButtonAddToBasket from '../ButtonAddToBasket';
 
-const InputCountGoods = ({ product, addToBasket }) => {
+const InputCountGoods = ({ product, basketAddProduct }) => {
   const [count, setCount] = useState(1);
 
   const onFormInputCountGoods = (event) => {
     event.preventDefault();
     for (let i = count; i > 0; i--) {
-      addToBasket(product);
+      basketAddProduct(product);
     }
   };
 

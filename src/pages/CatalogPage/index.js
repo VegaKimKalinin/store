@@ -1,20 +1,18 @@
 import React from 'react';
 import ProductCard from './components/ProductCard';
 import ShoppingBasketButton from './components/ShoppingBasketButton';
-import { connect } from 'react-redux';
-import { basketAddProduct } from '../../store/action/basket';
-import { fetchProductsRequest } from '../../store/action/products';
+import { bindActionCreators } from 'redux';
+import { connect, useSelector } from 'react-redux';
+import * as actionBasket from '../../store/action/basket';
+import * as actionProducts from '../../store/action/products';
 import { message } from 'antd';
 
 import './СatalogPage.css';
 
-const CatalogPage = ({
-  data,
-  getProducts,
-  addToBasket,
-  basketProducts,
-  location,
-}) => {
+const CatalogPage = ({ fetchProductsRequest, basketAddProduct, location }) => {
+  const data = useSelector((state) => state.products.list);
+  const basketProducts = useSelector((state) => state.basket);
+  const error = useSelector((state) => state.products.error);
   React.useEffect(() => {
     if (location.state) {
       message.info(location.state.message);
@@ -22,44 +20,36 @@ const CatalogPage = ({
   }, []);
 
   React.useEffect(() => {
-    getProducts();
+    fetchProductsRequest();
   }, []);
 
   return (
     <React.Fragment>
       <ShoppingBasketButton
-        addToBasket={addToBasket}
+        basketAddProduct={basketAddProduct}
         basketProducts={basketProducts}
       />
       <div className="catalog">
-        {data.items ? (
+        {error ? (
+          <div>Ошибка соединения с сервером</div>
+        ) : data.items ? (
           data.items.map((item) => (
             <ProductCard
               productItem={item}
               key={item.sys.id}
-              addToBasket={addToBasket}
+              basketAddProduct={basketAddProduct}
             />
           ))
         ) : (
-          <span>loding data</span>
+          <span>loding data...</span>
         )}
       </div>
     </React.Fragment>
   );
 };
 
-const mapStateToProps = (state) => ({
-  data: state.products.list,
-  basketProducts: state.basket,
-});
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ ...actionBasket, ...actionProducts }, dispatch);
+}
 
-const mapDispatchToProps = (dispatch) => ({
-  getProducts: () => {
-    dispatch(fetchProductsRequest());
-  },
-  addToBasket: (product) => {
-    dispatch(basketAddProduct(product));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CatalogPage);
+export default connect(null, mapDispatchToProps)(CatalogPage);

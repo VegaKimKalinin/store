@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect, useSelector } from 'react-redux';
 import CommentReg from './component/CommentReg';
 import ContactComment from './component/ContactComment';
-import { regUser } from '../../store/action/regUser';
+import * as action from '../../store/action/regUser';
 
 const Contact = ({ regUser }) => {
   const user = useSelector((state) => state.user);
@@ -24,7 +24,7 @@ const Contact = ({ regUser }) => {
 };
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ regUser }, dispatch);
+  return bindActionCreators(action, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(Contact);

@@ -1,12 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import BasketCard from './components/BasketCard';
 
 import './Basket.css';
 
-const Basket = ({ basketProducts }) => {
+const Basket = () => {
+  const basketProducts = useSelector((state) => state.basket);
   if (basketProducts.length === 0) {
     return (
       <Redirect
@@ -24,8 +25,4 @@ const Basket = ({ basketProducts }) => {
   }
 };
 
-const mapStateToProps = (state) => ({
-  basketProducts: state.basket,
-});
-
-export default connect(mapStateToProps)(Basket);
+export default Basket;

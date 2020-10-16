@@ -6,7 +6,7 @@ import Price from '../Price';
 import InputCountGoods from '../InputCountGoods';
 import './ProductCard.css';
 
-const ProductCard = ({ productItem, addToBasket }) => {
+const ProductCard = ({ productItem, basketAddProduct }) => {
   const onDragStart = (event) => {
     event.dataTransfer.setData('product', JSON.stringify(productItem));
   };
@@ -28,7 +28,10 @@ const ProductCard = ({ productItem, addToBasket }) => {
       <Image img={product.img} id={productItem.sys.id} />
       <TextBox text={product.title} />
       <Price price={product.price} />
-      <InputCountGoods product={productItem} addToBasket={addToBasket} />
+      <InputCountGoods
+        product={productItem}
+        basketAddProduct={basketAddProduct}
+      />
     </div>
   );
 };
