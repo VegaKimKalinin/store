@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect, useSelector } from 'react-redux';
 import CommentReg from './component/CommentReg';
 import ContactComment from './component/ContactComment';
-import * as action from '../../store/action/regUser';
+import * as action from '../../store/action';
 
 const Contact = ({ regUser }) => {
   const user = useSelector((state) => state.user);

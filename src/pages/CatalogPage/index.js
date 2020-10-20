@@ -3,8 +3,7 @@ import ProductCard from './components/ProductCard';
 import ShoppingBasketButton from './components/ShoppingBasketButton';
 import { bindActionCreators } from 'redux';
 import { connect, useSelector } from 'react-redux';
-import * as actionBasket from '../../store/action/basket';
-import * as actionProducts from '../../store/action/products';
+import * as action from '../../store/action';
 import { message } from 'antd';
 
 import './СatalogPage.css';
@@ -49,7 +48,7 @@ const CatalogPage = ({ fetchProductsRequest, basketAddProduct, location }) => {
 };
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ ...actionBasket, ...actionProducts }, dispatch);
+  return bindActionCreators(action, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(CatalogPage);

@@ -21,3 +21,20 @@ export function fetchProductsFailure(error) {
     error,
   };
 }
+
+export function basketAddProduct(product) {
+  return {
+    type: 'BASKET_ADD_PRODUCT',
+    product,
+  };
+}
+
+export function regUser(userName, password) {
+  return {
+    type: 'REG_USER',
+    user: {
+      userName,
+      password,
+    },
+  };
+}
