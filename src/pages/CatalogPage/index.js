@@ -1,34 +1,54 @@
 import React from 'react';
 import ProductCard from './components/ProductCard';
 import ShoppingBasketButton from './components/ShoppingBasketButton';
-import { useLocation } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect, useSelector } from 'react-redux';
+import * as action from '../../store/action';
 import { message } from 'antd';
-import BasketContext from '../../provider/BasketContext';
+
 import './СatalogPage.css';
 
-const CatalogPage = () => {
-  const { data } = React.useContext(BasketContext);
-  const location = useLocation();
-
+const CatalogPage = ({ fetchProductsRequest, basketAddProduct, location }) => {
+  const data = useSelector((state) => state.products.list);
+  const basketProducts = useSelector((state) => state.basket);
+  const error = useSelector((state) => state.products.error);
   React.useEffect(() => {
     if (location.state) {
       message.info(location.state.message);
     }
   }, []);
 
+  React.useEffect(() => {
+    fetchProductsRequest();
+  }, []);
+
   return (
     <React.Fragment>
-      <ShoppingBasketButton />
+      <ShoppingBasketButton
+        basketAddProduct={basketAddProduct}
+        basketProducts={basketProducts}
+      />
       <div className="catalog">
-        {data ? (
+        {error ? (
+          <div>Ошибка соединения с сервером</div>
+        ) : data.items ? (
           data.items.map((item) => (
-            <ProductCard productItem={item} key={item.sys.id} />
+            <ProductCard
+              productItem={item}
+              key={item.sys.id}
+              basketAddProduct={basketAddProduct}
+            />
           ))
         ) : (
-          <span>loding data</span>
+          <span>loding data...</span>
         )}
       </div>
     </React.Fragment>
   );
 };
-export default CatalogPage;
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(action, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(CatalogPage);

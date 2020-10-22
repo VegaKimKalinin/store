@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import BasketContext from '../../../../provider/BasketContext';
+import React from 'react';
 import { Form, Input, Button } from 'antd';
 
 const layout = {
@@ -18,13 +17,11 @@ const tailLayout = {
   },
 };
 
-const FormComment = () => {
-  const { logIn } = useContext(BasketContext);
-
+const FormComment = ({ regUser }) => {
   const onFinish = (values) => {
     console.log('Success:', values);
     const { username, password } = values;
-    logIn(username, password);
+    regUser(username, password);
   };
 
   const onFinishFailed = (errorInfo) => {
