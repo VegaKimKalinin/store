@@ -6,12 +6,11 @@ import TextBox from './components/TextBox';
 import Price from './components/Price';
 import './AboutProduct.css';
 
-const AboutProduct = () => {
-  const match = useRouteMatch('/product/:id');
+const AboutProduct = ({ computedMatch }) => {
   const [productItem, setProduct] = useState({});
 
   useEffect(() => {
-    const { id } = match.params;
+    const { id } = computedMatch.params;
     fetchProduct(id)
       .then((product) => setProduct(product))
       .catch((er) => console.log(er));

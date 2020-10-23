@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
-import createStore from './store/configureStore';
+import { store } from './store/configureStore';
 import { Router, Switch } from 'react-router-dom';
 import history from './component/History';
 import routes from './routes';
 import RouteWithSubRoutes from './component/RouteWithSubRoutes';
 import 'antd/dist/antd.css';
-
-const store = createStore();
+import 'bootstrap/dist/css/bootstrap.css';
 
 const App = () => (
   <Provider store={store}>
