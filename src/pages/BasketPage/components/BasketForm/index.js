@@ -1,43 +1,25 @@
 import React, { useState } from 'react';
-import Joi from 'joi-browser';
+import { validate, validateProperty } from '../../../../api/validateAPI';
 import Input from './Input';
 
-const BasketForm = () => {
-  const initialFormData = { fullName: '', phone: '', email: '', address: '' };
-
-  const [formData, setFormData] = useState(initialFormData);
+const BasketForm = ({ basketProducts, clearBasket }) => {
+  const initialData = {
+    fullName: '',
+    phone: '',
+    email: '',
+    address: '',
+  };
+  const [data, setdata] = useState(initialData);
   const [errors, setErrors] = useState({});
-
-  const schema1 = {
-    fullName: Joi.string().min(3).required(),
-    phone: Joi.string().required(),
-    email: Joi.string().email().required(),
-    address: Joi.string().required(),
-  };
-
-  const validate = () => {
-    const result = Joi.validate(formData, schema1, { abortEarly: false });
-    if (!result.error) return null;
-    const errors = {};
-    for (const item of result.error.details) {
-      errors[item.path[0]] = item.message;
-    }
-    return errors;
-  };
-
-  const validateProperty = ({ value, name }) => {
-    const obj = { [name]: value };
-    const schema = { [name]: schema1[name] };
-    const { error } = Joi.validate(obj, schema);
-    return error ? error.details[0].message : null;
-  };
 
   const handleSubmite = (e) => {
     e.preventDefault();
-    const errors = validate();
+    const errors = validate(data);
     setErrors(errors || {});
     if (errors) return;
-    console.log('Send data to server');
+    const serializedData = JSON.stringify({ ...data, basketProducts });
+    clearBasket();
+    console.log('Send data to server', serializedData);
   };
 
   const handelChange = ({ currentTarget }) => {
@@ -48,8 +30,7 @@ const BasketForm = () => {
     else {
       errors = {};
     }
-
-    setFormData({ ...formData, [name]: value });
+    setdata({ ...data, [name]: value });
     setErrors(errors);
   };
 
@@ -58,7 +39,7 @@ const BasketForm = () => {
       <Input
         name="fullName"
         label="ФИО"
-        value={formData.fullName}
+        value={data.fullName}
         type="text"
         onChange={handelChange}
         error={errors.fullName}
@@ -66,7 +47,7 @@ const BasketForm = () => {
       <Input
         name="phone"
         label="Телефон"
-        value={formData.phone}
+        value={data.phone}
         type="text"
         onChange={handelChange}
         error={errors.phone}
@@ -74,7 +55,7 @@ const BasketForm = () => {
       <Input
         name="email"
         label="Email"
-        value={formData.email}
+        value={data.email}
         type="text"
         onChange={handelChange}
         error={errors.email}
@@ -82,7 +63,7 @@ const BasketForm = () => {
       <Input
         name="address"
         label="Адрес"
-        value={formData.address}
+        value={data.address}
         type="text"
         onChange={handelChange}
         error={errors.address}

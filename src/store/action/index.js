@@ -29,6 +29,12 @@ export function basketAddProduct(product) {
   };
 }
 
+export function clearBasket() {
+  return {
+    type: 'CLEAR_BASKET',
+  };
+}
+
 export function regUser(userName, password) {
   return {
     type: 'REG_USER',

@@ -1,17 +1,16 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
 import BasketCard from './components/BasketCard';
 import BasketForm from './components/BasketForm';
+import * as action from '../../store/action';
 
 import './Basket.css';
 
-const Basket = () => {
+const Basket = ({ clearBasket }) => {
   const basketProducts = useSelector((state) => state.basket);
-  React.useEffect(() => {
-    console.log(basketProducts);
-  }, [basketProducts]);
+
   if (basketProducts.length === 0) {
     return (
       <Redirect
@@ -24,10 +23,13 @@ const Basket = () => {
         {basketProducts.map((addedProduct, item) => (
           <BasketCard productItem={addedProduct} key={item} />
         ))}
-        <BasketForm />
+        <BasketForm basketProducts={basketProducts} clearBasket={clearBasket} />
       </div>
     );
   }
 };
 
-export default Basket;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(action, dispatch);
+}
+export default connect(null, mapDispatchToProps)(Basket);
