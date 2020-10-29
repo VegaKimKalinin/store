@@ -2,17 +2,16 @@ import React from 'react';
 import ProductCard from './components/ProductCard';
 import ShoppingBasketButton from './components/ShoppingBasketButton';
 import { bindActionCreators } from 'redux';
-import * as useSelectors from '../../hooks/useselector';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import * as action from '../../store/action';
 import { message } from 'antd';
 
 import './СatalogPage.css';
 
 const CatalogPage = ({ basketAddProduct, location }) => {
-  const products = useSelectors.useProducts();
-  const error = useSelectors.useProducts('error');
-  const basketProducts = useSelectors.useBasket();
+  const products = useSelector((state) => state.products.list);
+  const error = useSelector((state) => state.products.error);
+  const basketProducts = useSelector((state) => state.basket);
 
   React.useEffect(() => {
     if (location.state) {

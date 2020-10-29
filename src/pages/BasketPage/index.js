@@ -1,7 +1,6 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as useSelectors from '../../hooks/useselector';
+import { connect, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import BasketCard from './components/BasketCard';
 import BasketForm from './components/BasketForm';
@@ -10,8 +9,8 @@ import * as action from '../../store/action';
 import './Basket.css';
 
 const Basket = ({ clearBasket }) => {
-  const products = useSelectors.useProducts();
-  const basketProducts = useSelectors.useBasket();
+  const products = useSelector((state) => state.products.list);
+  const basketProducts = useSelector((state) => state.basket);
   if (Object.keys(basketProducts).length === 0) {
     return (
       <Redirect

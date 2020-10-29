@@ -7,9 +7,7 @@ export default function basket(state = initialState, action) {
     case 'BASKET_ADD_PRODUCT':
       return {
         ...state,
-        [action.productId]: state[action.productId]
-          ? action.count + state[action.productId]
-          : action.count,
+        [action.productId]: action.count,
       };
     case 'CLEAR_BASKET':
       return {};

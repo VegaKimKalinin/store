@@ -24,8 +24,12 @@ const ShoppingBasketButton = ({ basketAddProduct, basketProducts }) => {
         onDragOver={onDragOver}
       >
         <span>
-          {' '}
-          {Object.values(basketProducts).reduce((acc, cv) => acc + cv, 0)}{' '}
+          &nbsp;
+          {Object.values(basketProducts).reduce((acc, currentValue) => {
+            acc += currentValue;
+            return acc;
+          }, 0)}
+          &nbsp;
         </span>
         Корзина
       </button>

@@ -25,9 +25,10 @@ export function fetchProductsFailure(error) {
 
 export function basketAddProduct(count, productId) {
   return (dispatch, getState) => {
+    const oldValue = getState().basket[productId] || 0;
     dispatch({
       type: 'BASKET_ADD_PRODUCT',
-      count,
+      count: count + oldValue,
       productId,
     });
     setBasket(getState().basket);
