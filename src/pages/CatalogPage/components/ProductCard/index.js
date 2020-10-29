@@ -22,7 +22,7 @@ const ProductCard = ({ product, basketAddProduct }) => {
       onDragStart={onDragStart}
       onDragOver={onDragOver}
     >
-      <Image img={product.img} id={product.id} />
+      <Image url={product.url} img={product.img} id={product.id} />
       <TextBox text={product.title} />
       <Price price={product.price} />
       <InputCountGoods

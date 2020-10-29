@@ -17,7 +17,8 @@ const Basket = ({ clearBasket }) => {
         to={{ pathname: '/', state: { message: 'Корзина Пуста!!!' } }}
       />
     );
-  } else if (Object.keys(products).length > 0) {
+  }
+  if (Object.keys(products).length > 0) {
     return (
       <>
         <BasketForm basketProducts={basketProducts} clearBasket={clearBasket} />
@@ -32,9 +33,8 @@ const Basket = ({ clearBasket }) => {
         </div>
       </>
     );
-  } else {
-    return <span>Загрузка данных...</span>;
   }
+  return <span>Загрузка данных...</span>;
 };
 
 function mapDispatchToProps(dispatch) {

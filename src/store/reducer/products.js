@@ -12,6 +12,7 @@ export default function products(state = initialState, action) {
           acc[product.sys.id] = {
             ...product.fields.product,
             ...product.sys,
+            url: product.fields.product.img.imageUrl[0],
           };
           return acc;
         }, {}),

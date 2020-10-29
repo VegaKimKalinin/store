@@ -16,13 +16,11 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router history={history}>
-        <React.Fragment>
-          <Switch>
-            {routes.map((route, i) => (
-              <RouteWithSubRoutes {...route} key={i} />
-            ))}
-          </Switch>
-        </React.Fragment>
+        <Switch>
+          {routes.map((route, i) => (
+            <RouteWithSubRoutes {...route} key={i} />
+          ))}
+        </Switch>
       </Router>
     </Provider>
   );
