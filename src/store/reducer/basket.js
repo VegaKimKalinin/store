@@ -1,11 +1,18 @@
-const initialState = [];
+import { initialBasket } from '../../utils/basketManager';
+
+const initialState = initialBasket();
 
 export default function basket(state = initialState, action) {
   switch (action.type) {
     case 'BASKET_ADD_PRODUCT':
-      return [...state, action.product];
+      return {
+        ...state,
+        [action.productId]: state[action.productId]
+          ? action.count + state[action.productId]
+          : action.count,
+      };
     case 'CLEAR_BASKET':
-      return initialState;
+      return {};
     default:
       return state;
   }

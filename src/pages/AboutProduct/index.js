@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useRouteMatch } from 'react-router-dom';
 import { fetchProduct } from '../../api/FetchData';
 import Image from './components/Image';
 import TextBox from './components/TextBox';

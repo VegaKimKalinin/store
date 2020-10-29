@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import ButtonAddToBasket from '../ButtonAddToBasket';
 
-const InputCountGoods = ({ product, basketAddProduct }) => {
+const InputCountGoods = ({ productId, basketAddProduct }) => {
   const [count, setCount] = useState(1);
 
   const onFormInputCountGoods = (event) => {
     event.preventDefault();
-    for (let i = count; i > 0; i--) {
-      basketAddProduct(product);
-    }
+    basketAddProduct(count, productId);
   };
 
   const handelChange = (event) => {
-    setCount(event.target.value);
+    setCount(+event.target.value);
   };
 
   return (

@@ -1,4 +1,5 @@
 import { fetchProducts } from '../../api/FetchData';
+import { setBasket, deleteBasket } from '../../utils/basketManager';
 
 export function fetchProductsRequest() {
   return (dispatch) => {
@@ -22,16 +23,23 @@ export function fetchProductsFailure(error) {
   };
 }
 
-export function basketAddProduct(product) {
-  return {
-    type: 'BASKET_ADD_PRODUCT',
-    product,
+export function basketAddProduct(count, productId) {
+  return (dispatch, getState) => {
+    dispatch({
+      type: 'BASKET_ADD_PRODUCT',
+      count,
+      productId,
+    });
+    setBasket(getState().basket);
   };
 }
 
 export function clearBasket() {
-  return {
-    type: 'CLEAR_BASKET',
+  deleteBasket();
+  return (dispatch) => {
+    dispatch({
+      type: 'CLEAR_BASKET',
+    });
   };
 }
 

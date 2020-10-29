@@ -1,82 +1,96 @@
-import React, { useState } from 'react';
-import { validate, validateProperty } from '../../../../api/validateAPI';
-import Input from './Input';
+import React from 'react';
+import { Form, Input, Button } from 'antd';
+
+const layout = {
+  labelCol: {
+    span: 8,
+  },
+  wrapperCol: {
+    span: 0,
+  },
+};
+const tailLayout = {
+  wrapperCol: {
+    offset: 8,
+    span: 16,
+  },
+};
 
 const BasketForm = ({ basketProducts, clearBasket }) => {
-  const initialData = {
-    fullName: '',
-    phone: '',
-    email: '',
-    address: '',
-  };
-  const [data, setdata] = useState(initialData);
-  const [errors, setErrors] = useState({});
-
-  const handleSubmite = (e) => {
-    e.preventDefault();
-    const errors = validate(data);
-    setErrors(errors || {});
-    if (errors) return;
-    const serializedData = JSON.stringify({ ...data, basketProducts });
+  const onFinish = (values) => {
     clearBasket();
-    console.log('Send data to server', serializedData);
+    console.log({ ...values, basketProducts });
   };
 
-  const handelChange = ({ currentTarget }) => {
-    const { value, name } = currentTarget;
-    let errors = { ...errors };
-    const errorMesage = validateProperty(currentTarget);
-    if (errorMesage) errors[name] = errorMesage;
-    else {
-      errors = {};
-    }
-    setdata({ ...data, [name]: value });
-    setErrors(errors);
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
   };
 
   return (
-    <form onSubmit={handleSubmite}>
-      <Input
-        name="fullName"
+    <Form
+      {...layout}
+      name="basic"
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+    >
+      <Form.Item
         label="ФИО"
-        value={data.fullName}
-        type="text"
-        onChange={handelChange}
-        error={errors.fullName}
-      />
-      <Input
-        name="phone"
-        label="Телефон"
-        value={data.phone}
-        type="text"
-        onChange={handelChange}
-        error={errors.phone}
-      />
-      <Input
-        name="email"
-        label="Email"
-        value={data.email}
-        type="text"
-        onChange={handelChange}
-        error={errors.email}
-      />
-      <Input
-        name="address"
-        label="Адрес"
-        value={data.address}
-        type="text"
-        onChange={handelChange}
-        error={errors.address}
-      />
+        name="fullname"
+        rules={[
+          {
+            required: true,
+            message: 'Пожалуйста, заполните ФИО!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
 
-      <div className="form-group row">
-        <div className="col-sm-10">
-          <button type="submit" className="btn btn-primary">
-            Send
-          </button>
-        </div>
-      </div>
-    </form>
+      <Form.Item
+        label="Телефон"
+        name="phone"
+        rules={[
+          {
+            required: true,
+            message: 'Пожалуйста, заполните телефон!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="Email"
+        name="email"
+        rules={[
+          {
+            required: true,
+            message: 'Пожалуйста, заполните Email!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="Адрес"
+        name="address"
+        rules={[
+          {
+            required: true,
+            message: 'Пожалуйста, заполните Адрес!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item {...tailLayout}>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };
 

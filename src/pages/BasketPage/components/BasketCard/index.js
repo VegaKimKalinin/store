@@ -5,19 +5,13 @@ import Price from '../Price';
 
 import './BasketCard.css';
 
-const BasketCard = ({ productItem }) => {
-  const { product } = productItem.fields;
-  return (
-    <div className="basket-card">
-      <Image
-        img={product.img}
-        id={productItem.sys.id}
-        url={product.img.imageUrl[0]}
-      />
-      <TextBox text={product.title} />
-      <Price price={product.price} />
-    </div>
-  );
-};
+const BasketCard = ({ product, count }) => (
+  <div className="basket-card">
+    <Image img={product.img} id={product.id} url={product.img.imageUrl[0]} />
+    <TextBox text={product.title} />
+    <Price price={product.price} />
+    <div>Количество товара {count} шт</div>
+  </div>
+);
 
 export default BasketCard;

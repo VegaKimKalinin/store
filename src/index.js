@@ -6,21 +6,26 @@ import { Router, Switch } from 'react-router-dom';
 import history from './component/History';
 import routes from './routes';
 import RouteWithSubRoutes from './component/RouteWithSubRoutes';
+import * as actions from './store/action';
 import 'antd/dist/antd.css';
-import 'bootstrap/dist/css/bootstrap.css';
 
-const App = () => (
-  <Provider store={store}>
-    <Router history={history}>
-      <React.Fragment>
-        <Switch>
-          {routes.map((route, i) => (
-            <RouteWithSubRoutes {...route} key={i} />
-          ))}
-        </Switch>
-      </React.Fragment>
-    </Router>
-  </Provider>
-);
+const App = () => {
+  React.useEffect(() => {
+    store.dispatch(actions.fetchProductsRequest());
+  }, []);
+  return (
+    <Provider store={store}>
+      <Router history={history}>
+        <React.Fragment>
+          <Switch>
+            {routes.map((route, i) => (
+              <RouteWithSubRoutes {...route} key={i} />
+            ))}
+          </Switch>
+        </React.Fragment>
+      </Router>
+    </Provider>
+  );
+};
 
 ReactDom.render(<App />, document.getElementById('root'));
