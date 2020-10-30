@@ -1,28 +1,43 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
 import BasketCard from './components/BasketCard';
+import BasketForm from './components/BasketForm';
+import * as action from '../../store/action';
 
 import './Basket.css';
 
-const Basket = () => {
+const Basket = ({ clearBasket }) => {
+  const products = useSelector((state) => state.products.list);
   const basketProducts = useSelector((state) => state.basket);
-  if (basketProducts.length === 0) {
+  if (Object.keys(basketProducts).length === 0) {
     return (
       <Redirect
         to={{ pathname: '/', state: { message: 'Корзина Пуста!!!' } }}
       />
     );
-  } else {
+  }
+  if (Object.keys(products).length > 0) {
     return (
-      <div className="basket">
-        {basketProducts.map((addedProduct, item) => (
-          <BasketCard productItem={addedProduct} key={item} />
-        ))}
-      </div>
+      <>
+        <BasketForm basketProducts={basketProducts} clearBasket={clearBasket} />
+        <div className="basket">
+          {Object.keys(basketProducts).map((basketProduct) => (
+            <BasketCard
+              product={products[basketProduct]}
+              key={basketProduct}
+              count={basketProducts[basketProduct]}
+            />
+          ))}
+        </div>
+      </>
     );
   }
+  return <span>Загрузка данных...</span>;
 };
 
-export default Basket;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(action, dispatch);
+}
+export default connect(null, mapDispatchToProps)(Basket);

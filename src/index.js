@@ -1,27 +1,29 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
-import createStore from './store/configureStore';
+import { store } from './store/configureStore';
 import { Router, Switch } from 'react-router-dom';
 import history from './component/History';
 import routes from './routes';
 import RouteWithSubRoutes from './component/RouteWithSubRoutes';
+import * as actions from './store/action';
 import 'antd/dist/antd.css';
 
-const store = createStore();
-
-const App = () => (
-  <Provider store={store}>
-    <Router history={history}>
-      <React.Fragment>
+const App = () => {
+  React.useEffect(() => {
+    store.dispatch(actions.fetchProductsRequest());
+  }, []);
+  return (
+    <Provider store={store}>
+      <Router history={history}>
         <Switch>
           {routes.map((route, i) => (
             <RouteWithSubRoutes {...route} key={i} />
           ))}
         </Switch>
-      </React.Fragment>
-    </Router>
-  </Provider>
-);
+      </Router>
+    </Provider>
+  );
+};
 
 ReactDom.render(<App />, document.getElementById('root'));
