@@ -1,9 +1,14 @@
 const path = require('path');
+const Manifest = require('webpack-manifest-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
   mode: 'development',
 
   entry: './src/index.js',
+
+  plugins: [new MiniCssExtractPlugin(), new Manifest()],
+
   output: {
     publicPath: '/',
     filename: 'main.js',
@@ -14,20 +19,14 @@ const config = {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: [path.resolve(__dirname, 'node_modules')],
-        use: 'babel-loader',
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+        },
       },
       {
-        test: /\.css/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2,
-            },
-          },
-        ],
+        test: /\.css$/i,
+        use: [{ loader: MiniCssExtractPlugin.loader }, 'css-loader'],
       },
     ],
   },
