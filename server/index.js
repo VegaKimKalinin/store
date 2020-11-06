@@ -1,16 +1,6 @@
-const express = require('express');
-const app = express();
-
-const manifest = require('../dist/manifest.json');
-const webpackAsset = (main) => manifest[main.js];
-app.use(express.static('dist'));
-app.set('views', __dirname);
-app.set('view engine', 'ejs');
-
-app.get('*', (req, res) => {
-  res.render('index', { webpackAsset });
+require('ignore-styles');
+require('@babel/register')({
+  ignore: [/node_module/],
+  presets: ['@babel/preset-env', '@babel/preset-react'],
 });
-
-app.listen(8080, () => {
-  console.log('Server listening on 8080');
-});
+require('./server');

@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require(webpack);
 const Manifest = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -7,7 +8,11 @@ const config = {
 
   entry: './src/index.js',
 
-  plugins: [new MiniCssExtractPlugin(), new Manifest()],
+  plugins: [
+    new MiniCssExtractPlugin(),
+    new Manifest(),
+    new webpack.DefinePlugin({ __SERVER__: false }),
+  ],
 
   output: {
     publicPath: '/',
