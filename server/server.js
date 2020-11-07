@@ -3,13 +3,13 @@ import fs from 'fs';
 import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { App } from '../src';
+import AppServer from './AppServer';
 
 const PORT = 8000;
 
 const app = express();
 app.use('^/$', (req, res, next) => {
-  fs.readFile(path.resoleve('./dist/index.html'), 'utf-8', (err, data) => {
+  fs.readFile(path.resolve('./dist/index.html'), 'utf-8', (err, data) => {
     if (err) {
       console.log(err);
       return res.status(500).send('some error occured');
@@ -17,11 +17,10 @@ app.use('^/$', (req, res, next) => {
     return res.send(
       data.replace(
         '<div id="root"></div>',
-        `<div id="root">${ReactDOMServer.renderToString(<App />)}</div>`,
+        `<div id="root">${ReactDOMServer.renderToString(<AppServer />)}</div>`,
       ),
     );
   });
-  next();
 });
 
 app.use(express.static(path.resolve(__dirname, '..', 'dist')));
