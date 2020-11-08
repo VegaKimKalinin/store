@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
-import { store } from './store/configureStore';
+import store from './store/configureStore';
 import { Router, Switch } from 'react-router-dom';
 import history from './component/History';
 import routes from './routes';
@@ -9,7 +9,7 @@ import RouteWithSubRoutes from './component/RouteWithSubRoutes';
 import * as actions from './store/action';
 import 'antd/dist/antd.css';
 
-const App = () => {
+export const App = () => {
   React.useEffect(() => {
     store.dispatch(actions.fetchProductsRequest());
   }, []);
@@ -26,4 +26,4 @@ const App = () => {
   );
 };
 
-ReactDom.render(<App />, document.getElementById('root'));
+ReactDom.hydrate(<App />, document.getElementById('root'));
