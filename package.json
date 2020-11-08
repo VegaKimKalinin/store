@@ -11,6 +11,7 @@
   "author": "Kalinin Dmitry",
   "license": "ISC",
   "dependencies": {
+    "@ant-design/icons": "^4.2.2",
     "@babel/register": "^7.12.1",
     "@babel/runtime": "^7.12.1",
     "antd": "^4.6.5",
