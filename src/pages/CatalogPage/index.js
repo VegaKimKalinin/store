@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductCard from './components/ProductCard';
+import ShopCard from './components/Card';
 import { bindActionCreators } from 'redux';
 import { connect, useSelector } from 'react-redux';
 import * as action from '../../store/action';
@@ -24,7 +24,7 @@ const CatalogPage = ({ basketAddProduct, location }) => {
           <div>Ошибка соединения с сервером</div>
         ) : Object.keys(products).length > 0 ? (
           Object.values(products).map((item) => (
-            <ProductCard
+            <ShopCard
               product={item}
               key={item.id}
               basketAddProduct={basketAddProduct}
